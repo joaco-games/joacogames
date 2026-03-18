@@ -3,75 +3,63 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>JoacoGames | Mobile Core</title>
+    <title>JoacoGames | Central de Mando</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body class="jg-cyber-dark">
-
     <div class="bg-overlay"></div>
 
     <header class="jg-navbar">
         <div class="jg-container">
             <div class="jg-brand-hub" onclick="adminMode()">
-                <div class="panther-hex">
-                    <img src="images/panther_logo.png" alt="JoacoGames">
-                </div>
+                <div class="panther-hex"><img src="images/panther_logo.png" alt="JG"></div>
                 <h1 class="jg-title-text">JOACO<span>GAMES</span></h1>
             </div>
-            
-            <div class="jg-profile-mini">
-                <img src="images/avatar_joaco.jpg" alt="Joaco" class="jg-user-img">
+            <div class="jg-profile-pill">
+                <div class="stats-text">
+                    <span id="userLevel">Nivel 1</span>
+                    <span id="userPoints">0 XP</span>
+                </div>
+                <img src="images/avatar_joaco.jpg" alt="Admin" class="jg-user-img">
             </div>
         </div>
     </header>
 
     <main class="jg-dashboard">
+        <div id="notificacionLogro" class="jg-notification">
+            <span id="logroTitulo">🏆 ¡LOGRO DESBLOQUEADO!</span>
+        </div>
+
         <section class="jg-hero-v2">
             <div class="hero-content">
-                <span class="badge-new">SISTEMA MÓVIL ACTIVO</span>
-                <h2>Núcleo de Mando</h2>
+                <span class="badge-new" id="novedadesText">[SISTEMA OPERATIVO JOACO v1.0]</span>
+                <h1>Explora el Multiverso</h1>
                 <div class="hero-btns">
-                    <button class="btn-primary-neon" onclick="addNewGame()">+ PROYECTO</button>
+                    <button class="btn-primary-neon" onclick="registrarPartida(true)">SIMULAR VICTORIA (+100 XP)</button>
                 </div>
             </div>
         </section>
 
-        <section class="jg-network-hub">
-            <div class="section-header">
-                <h3>ENLACES DE NÚCLEO (LINKTREE)</h3>
-            </div>
+        <section class="jg-network-hub container">
+            <h3>CONEXIONES (LINKTREE)</h3>
             <div class="social-links-container">
-                <a href="https://linktr.ee/joacogames" target="_blank" class="link-node">
-                    <span class="node-icon">🔗</span> LINKTREE_OFFICIAL
-                </a>
-                <a href="https://www.instagram.com/tu_usuario" target="_blank" class="link-node">
-                    <span class="node-icon">📸</span> INSTAGRAM_LOG
-                </a>
-                <a href="https://discord.gg/tu_invitacion" target="_blank" class="link-node">
-                    <span class="node-icon">💬</span> DISCORD_SRV
-                </a>
+                <a href="https://linktr.ee/joacogames" target="_blank" class="link-node">🔗 LINKTREE_OFFICIAL</a>
+                <a href="https://instagram.com/tu_user" target="_blank" class="link-node">📸 INSTAGRAM_LOG</a>
+                <a href="https://discord.gg/tu_link" target="_blank" class="link-node">💬 DISCORD_SRV</a>
             </div>
         </section>
 
-        <section class="jg-grid-section">
-            <div class="section-header">
-                <h2>BASE DE DATOS</h2>
-                <div class="jg-line-decorator"></div>
-            </div>
-            
-            <div class="jg-empty-state" id="emptyState">
-                <div class="panther-scanner"></div>
-                <p>ESPERANDO INYECCIÓN DE DATOS...</p>
-            </div>
-
-            <div class="jg-cyber-grid" id="gameGrid"></div>
+        <section class="jg-grid-section container">
+            <h3>BIBLIOTECA DE PROYECTOS</h3>
+            <div class="jg-cyber-grid" id="gameGrid">
+                </div>
         </section>
     </main>
 
     <nav class="jg-bottom-nav">
         <a href="#" class="b-nav-item active">NÚCLEO</a>
         <a href="#comunidad" class="b-nav-item">REDES</a>
-        <a href="#" class="b-nav-item">PERFIL</a>
+        <button onclick="addNewGame()" class="b-nav-item btn-add">+</button>
     </nav>
 
     <script src="script.js"></script>
