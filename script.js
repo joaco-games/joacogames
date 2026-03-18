@@ -1,58 +1,82 @@
-/**
- * JOACOGAMES - Mobile Engine
- */
+// --- DATOS DEL USUARIO (Sincronizado con tu GDScript) ---
+let usuario = {
+    "puntos": 0,
+    "nivel": 1,
+    "partidas": 0,
+    "victorias_seguidas": 0,
+    "logros": {
+        "novato": {"titulo": "Primer Paso", "ganado": false},
+        "racha": {"titulo": "Racha de Fuego", "ganado": false}
+    }
+};
 
-let JOACO_PROJECTS = [];
-
-const updateInterface = () => {
-    const grid = document.getElementById('gameGrid');
-    const emptyState = document.getElementById('emptyState');
-    
-    if (JOACO_PROJECTS.length === 0) {
-        grid.style.display = "none";
-        emptyState.style.display = "flex";
+// --- LÓGICA DE PROGRESO (Igual a tu Godot) ---
+function registrarPartida(gano) {
+    usuario.partidas += 1;
+    if (gano) {
+        usuario.victorias_seguidas += 1;
+        usuario.puntos += 100;
     } else {
-        emptyState.style.display = "none";
-        grid.style.display = "grid";
-        
-        grid.innerHTML = JOACO_PROJECTS.map((proj) => `
-            <article class="jg-game-card-v2">
-                <div class="jg-card-body">
-                    <span class="version-code">MOBILE_READY</span>
-                    <h3 class="jg-game-title">${proj.title}</h3>
-                    <button class="btn-primary-neon" style="width:100%" onclick="launchProtocol('${proj.title}')">
-                        INICIAR
-                    </button>
-                </div>
-            </article>
-        `).join('');
+        usuario.victorias_seguidas = 0;
+        usuario.puntos += 20;
     }
-};
 
-window.addNewGame = () => {
-    // Usamos un prompt simple que funciona bien en móviles
-    const name = prompt("Nombre del Proyecto:");
-    if (name) {
-        JOACO_PROJECTS.push({ title: name.toUpperCase() });
-        updateInterface();
-        // Feedback táctico
-        if ('vibrate' in navigator) navigator.vibrate(50); 
+    // Subir de nivel cada 500 puntos
+    usuario.nivel = Math.floor(usuario.puntos / 500) + 1;
+    
+    chequearLogros();
+    actualizarInterfaz();
+    
+    // Feedback visual
+    console.log(`[JOACOGAMES] Partidas: ${usuario.partidas} | XP: ${usuario.puntos}`);
+}
+
+function chequearLogros() {
+    if (usuario.partidas >= 1 && !usuario.logros.novato.ganado) {
+        desbloquearLogro("novato");
     }
-};
-
-window.launchProtocol = (name) => {
-    alert(`ACCESO MÓVIL: Conectando a ${name}`);
-};
-
-// Modo Admin con Toques
-let touches = 0;
-window.adminMode = () => {
-    touches++;
-    if (touches === 5) {
-        document.body.classList.toggle('admin-mode-active');
-        alert("MODO ADMIN ACTIVADO");
-        touches = 0;
+    if (usuario.victorias_seguidas >= 3 && !usuario.logros.racha.ganado) {
+        desbloquearLogro("racha");
     }
-};
+}
 
-document.addEventListener('DOMContentLoaded', updateInterface);
+function desbloquearLogro(id) {
+    usuario.logros[id].ganado = true;
+    const panel = document.getElementById("notificacionLogro");
+    const titulo = document.getElementById("logroTitulo");
+    
+    titulo.innerText = "🏆 " + usuario.logros[id].titulo;
+    panel.classList.add("show");
+    
+    setTimeout(() => { panel.classList.remove("show"); }, 3000);
+}
+
+function actualizarInterfaz() {
+    document.getElementById("userLevel").innerText = `Nivel ${usuario.nivel}`;
+    document.getElementById("userPoints").innerText = `${usuario.puntos} XP`;
+    
+    // Efecto wave para novedades
+    document.getElementById("novedadesText").innerText = "🔥 NUEVO: Sistema de rangos activado!";
+}
+
+// Inyección de proyectos dinámica
+let misProyectos = ["Age of the Dead Master", "Grim Empires"];
+
+function renderBiblioteca() {
+    const grid = document.getElementById("gameGrid");
+    grid.innerHTML = misProyectos.map(p => `
+        <div class="link-node" onclick="registrarPartida(true)" style="text-align:left">
+            <span>🎮 ${p}</span>
+        </div>
+    `).join('');
+}
+
+function addNewGame() {
+    const p = prompt("Nombre del nuevo proyecto:");
+    if(p) { misProyectos.push(p); renderBiblioteca(); }
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+    actualizarInterfaz();
+    renderBiblioteca();
+});
