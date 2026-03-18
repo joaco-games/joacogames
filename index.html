@@ -2,8 +2,8 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JoacoGames | Central de Mando</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>JoacoGames | Mobile Core</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body class="jg-cyber-dark">
@@ -12,26 +12,15 @@
 
     <header class="jg-navbar">
         <div class="jg-container">
-            <div class="jg-brand-hub">
-                <div class="panther-hex" onclick="adminMode()">
+            <div class="jg-brand-hub" onclick="adminMode()">
+                <div class="panther-hex">
                     <img src="images/panther_logo.png" alt="JoacoGames">
                 </div>
-                <div class="jg-title">
-                    <span class="glitch" data-text="JOACOGAMES">JOACOGAMES</span>
-                </div>
+                <h1 class="jg-title-text">JOACO<span>GAMES</span></h1>
             </div>
-
-            <nav class="jg-nav-links">
-                <a href="#" class="nav-item active">NÚCLEO</a>
-                <a href="#comunidad" class="nav-item">RED SOCIAL</a>
-                <a href="#" class="nav-item">ARCHIVOS</a>
-                <a href="#" class="nav-item">SOPORTE</a>
-            </nav>
-
-            <div class="jg-profile-pill">
-                <span class="jg-rank">Nivel 99</span>
-                <img src="images/avatar_joaco.jpg" alt="Admin" class="jg-user-img">
-                <div class="jg-online-pulse"></div>
+            
+            <div class="jg-profile-mini">
+                <img src="images/avatar_joaco.jpg" alt="Joaco" class="jg-user-img">
             </div>
         </div>
     </header>
@@ -39,62 +28,51 @@
     <main class="jg-dashboard">
         <section class="jg-hero-v2">
             <div class="hero-content">
-                <span class="badge-new">SISTEMA OPERATIVO JOACO v1.0</span>
-                <h1>Bienvenido al Núcleo de Mando</h1>
-                <p>Plataforma privada para la familia y amigos de JoacoGames.</p>
+                <span class="badge-new">SISTEMA MÓVIL ACTIVO</span>
+                <h2>Núcleo de Mando</h2>
                 <div class="hero-btns">
-                    <button class="btn-primary-neon" onclick="addNewGame()">INYECTAR PROYECTO</button>
-                    <button class="btn-secondary-outline">ESTADO DE RED</button>
+                    <button class="btn-primary-neon" onclick="addNewGame()">+ PROYECTO</button>
                 </div>
             </div>
-            <div class="hero-visual">
-                <div class="floating-j">
-                    <img src="images/banner_juaco.jpg" alt="Joaco Brand">
-                </div>
+        </section>
+
+        <section class="jg-network-hub">
+            <div class="section-header">
+                <h3>ENLACES DE NÚCLEO (LINKTREE)</h3>
+            </div>
+            <div class="social-links-container">
+                <a href="https://linktr.ee/joacogames" target="_blank" class="link-node">
+                    <span class="node-icon">🔗</span> LINKTREE_OFFICIAL
+                </a>
+                <a href="https://www.instagram.com/tu_usuario" target="_blank" class="link-node">
+                    <span class="node-icon">📸</span> INSTAGRAM_LOG
+                </a>
+                <a href="https://discord.gg/tu_invitacion" target="_blank" class="link-node">
+                    <span class="node-icon">💬</span> DISCORD_SRV
+                </a>
             </div>
         </section>
 
         <section class="jg-grid-section">
             <div class="section-header">
-                <h2>Proyectos y Despliegues</h2>
+                <h2>BASE DE DATOS</h2>
                 <div class="jg-line-decorator"></div>
             </div>
             
             <div class="jg-empty-state" id="emptyState">
                 <div class="panther-scanner"></div>
-                <div class="empty-text">
-                    <h3>SINCRONIZACIÓN COMPLETADA</h3>
-                    <p>No se han detectado juegos o archivos en el sector actual.</p>
-                    <span class="system-log">> Esperando órdenes del administrador...</span>
-                </div>
+                <p>ESPERANDO INYECCIÓN DE DATOS...</p>
             </div>
 
-            <div class="jg-cyber-grid" id="gameGrid">
-                </div>
-        </section>
-
-        <section id="comunidad" class="jg-social-hub container">
-            <h3>CONEXIONES EXTERNAS</h3>
-            <div class="social-grid">
-                <a href="https://discord.gg/tu-link" class="social-card discord">
-                    <span class="social-tag">VOZ Y CHAT</span>
-                    <span class="social-name">DISCORD_NET</span>
-                </a>
-                <a href="https://instagram.com/tu-user" class="social-card instagram">
-                    <span class="social-tag">VISUAL_LOG</span>
-                    <span class="social-name">INTEL_GRAM</span>
-                </a>
-                <a href="#" class="social-card personal">
-                    <span class="social-tag">DIRECTO</span>
-                    <span class="social-name">WHATS_LINK</span>
-                </a>
-            </div>
+            <div class="jg-cyber-grid" id="gameGrid"></div>
         </section>
     </main>
 
-    <footer class="jg-footer-simple">
-        <p>JOACOGAMES // MODO: PRIVADO // 2024</p>
-    </footer>
+    <nav class="jg-bottom-nav">
+        <a href="#" class="b-nav-item active">NÚCLEO</a>
+        <a href="#comunidad" class="b-nav-item">REDES</a>
+        <a href="#" class="b-nav-item">PERFIL</a>
+    </nav>
 
     <script src="script.js"></script>
 </body>
