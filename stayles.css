@@ -1,68 +1,184 @@
+/* --- Variables de Marca --- */
 :root {
-    --gold: #e0ac00;
-    --dark: #050505;
+    --steam-dark: #171d25;
     --steam-blue: #1b2838;
     --epic-black: #121212;
+    --neon-gold: #e0ac00;
+    --neon-blue: #007bff;
+    --glass: rgba(20, 20, 25, 0.85);
+    --neon-border: rgba(224, 172, 0, 0.3);
 }
+
+/* --- Reset y Tipografía --- */
+* { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
 
 body {
-    background: radial-gradient(circle at top, #121212 0%, #000 100%);
-    color: white; font-family: 'Segoe UI', sans-serif; margin: 0;
-    padding-bottom: 90px; overflow-x: hidden;
+    background: radial-gradient(circle at top, #1b2838 0%, #050505 100%);
+    color: white;
+    font-family: 'Motiva Sans', Sans-serif; /* O Fallback */
+    margin: 0;
+    overflow-x: hidden;
+    padding-bottom: 90px; /* Espacio para mobile nav */
 }
 
-.jg-container { max-width: 1000px; margin: 0 auto; padding: 0 20px; }
+.jg-cyber-dark { background-color: #050505; }
+.jg-container { max-width: 1400px; margin: 0 auto; padding: 0 15px; }
+.container { padding: 0 20px; }
 
-/* Navbar Estilo Steam */
+/* --- HEADER / NAVBAR (Fusión Steam/Epic) --- */
 .jg-navbar {
-    background: rgba(23, 29, 37, 0.95);
-    border-bottom: 2px solid var(--gold);
-    padding: 10px 0; position: sticky; top: 0; z-index: 100;
+    background: var(--glass);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--neon-gold);
+    padding: 12px 0;
+    position: sticky; top: 0; z-index: 1000;
+    transition: 0.3s;
 }
 
 .nav-flex { display: flex; justify-content: space-between; align-items: center; }
-.jg-brand { display: flex; align-items: center; gap: 10px; cursor: pointer; }
-.logo-img { width: 35px; filter: drop-shadow(0 0 5px var(--gold)); }
-.jg-title { font-size: 1.2rem; margin: 0; letter-spacing: 1.5px; }
-.jg-title span { color: var(--gold); }
 
-/* Perfil */
-.user-stats { display: flex; align-items: center; gap: 12px; }
-.stats-info { text-align: right; font-size: 0.7rem; font-weight: bold; }
-#userLevel { color: var(--gold); display: block; }
-.avatar { width: 35px; height: 35px; border-radius: 50%; border: 1px solid var(--gold); }
+/* Logo de Pantera Personalizado */
+.jg-brand-hub { display: flex; align-items: center; gap: 10px; cursor: pointer; }
+.panther-hex {
+    width: 45px; height: 45px;
+    background: var(--epic-black);
+    border: 2px solid var(--neon-gold);
+    border-radius: 5px;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 0 10px var(--neon-border);
+}
+.panther-hex img { width: 35px; }
 
-/* Hero Estilo Epic */
-.epic-hero { padding: 20px; }
-.featured-card {
-    height: 350px; border-radius: 15px; position: relative;
-    overflow: hidden; border: 1px solid rgba(255,255,255,0.1);
+.jg-title-text { font-size: 1.2rem; margin: 0; letter-spacing: 2px; }
+.jg-title-text span { color: var(--neon-gold); text-shadow: 0 0 10px var(--neon-gold); }
+
+/* Nav Links Steam Style */
+.jg-nav-links { display: flex; gap: 20px; }
+.nav-item {
+    text-decoration: none; color: #888; font-weight: bold; font-size: 0.8rem;
+    padding: 10px; transition: 0.3s;
 }
-.hero-bg { width: 100%; height: 100%; object-fit: cover; opacity: 0.7; }
-.hero-content {
-    position: absolute; bottom: 0; left: 0; padding: 30px;
-    background: linear-gradient(transparent, rgba(0,0,0,0.9)); width: 100%;
+.nav-item:hover, .nav-item.active { color: white; border-bottom: 2px solid var(--neon-gold); }
+
+/* Perfil y XP */
+.jg-profile-pill { display: flex; align-items: center; gap: 10px; }
+.stats-text { display: flex; flex-direction: column; text-align: right; font-size: 0.7rem; }
+#userLevel { color: var(--neon-gold); font-weight: bold; }
+#userPoints { color: #888; }
+.jg-user-img { width: 40px; height: 40px; border-radius: 50%; border: 2px solid var(--neon-gold); }
+
+/* --- SECCIÓN HERO (Epic Style) --- */
+.jg-hero-v2 { margin: 25px 0; }
+.hero-banner-container {
+    position: relative;
+    width: 100%; height: 280px;
+    border-radius: 15px; overflow: hidden;
+    border: 1px solid var(--neon-border);
 }
-.badge { background: var(--gold); color: black; padding: 4px 10px; border-radius: 4px; font-size: 0.7rem; font-weight: 900; }
-.btn-launch {
-    background: white; color: black; border: none; padding: 12px 25px;
-    font-weight: bold; border-radius: 5px; margin-top: 15px; cursor: pointer;
+.main-banner { width: 100%; height: 100%; object-fit: cover; opacity: 0.6; }
+.hero-overlay {
+    position: absolute; bottom: 0; left: 0; width: 100%;
+    padding: 30px;
+    background: linear-gradient(transparent, rgba(0,0,0,0.9));
 }
 
-/* Barra de Progreso */
-.progress-bar {
-    width: 100%; height: 10px; background: #1b2838; border-radius: 5px;
-    margin: 10px 0; border: 1px solid #333; overflow: hidden;
+.badge-new {
+    background: var(--neon-blue); color: white; padding: 4px 10px;
+    font-size: 0.7rem; font-weight: bold; border-radius: 4px;
 }
-.fill { height: 100%; background: var(--gold); width: 0%; transition: 0.5s; box-shadow: 0 0 10px var(--gold); }
+.hero-overlay h2 { margin: 10px 0; font-size: 2rem; }
+.hero-overlay p { margin: 0 0 15px; color: #888; font-size: 0.9rem; }
 
-/* Mobile Nav */
-.mobile-nav {
-    position: fixed; bottom: 0; width: 100%; height: 70px;
-    background: #111; border-top: 1px solid var(--gold);
-    display: flex; justify-content: space-around; align-items: center;
+.btn-primary-neon {
+    background: var(--neon-gold); color: black; border: none;
+    padding: 12px 25px; font-weight: bold; border-radius: 5px; cursor: pointer;
+    transition: 0.3s;
 }
-.nav-add {
-    width: 55px; height: 55px; background: var(--gold); border-radius: 50%;
-    border: none; font-size: 1.8rem; transform: translateY(-20px);
+.btn-primary-neon:hover { transform: scale(1.05); box-shadow: 0 0 15px var(--neon-gold); }
+
+/* --- REDES SOCIALES (Nodos Style) --- */
+.jg-network-hub { margin: 40px 0; }
+.section-header { margin-bottom: 20px; }
+.section-header h3 { margin: 0; font-size: 1rem; color: #666; }
+.jg-line-decorator { width: 50px; height: 2px; background: var(--neon-gold); margin-top: 5px; }
+
+.social-links-container {
+    display: flex; flex-direction: column; gap: 10px;
+}
+.link-node {
+    background: var(--glass);
+    border: 1px solid var(--neon-border);
+    padding: 18px; border-radius: 10px;
+    display: flex; align-items: center;
+    color: white; text-decoration: none; font-weight: bold;
+    transition: 0.3s;
+}
+.link-node:hover {
+    background: var(--neon-gold); color: black;
+    transform: translateX(10px);
+}
+.node-icon { margin-right: 15px; font-size: 1.2rem; }
+
+/* --- ESTADO VACÍO INTERACTIVO --- */
+.jg-empty-state {
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    padding: 60px 20px;
+    background: rgba(255,255,255,0.02);
+    border: 1px dashed var(--neon-border);
+    border-radius: 20px;
+    text-align: center; position: relative; overflow: hidden;
+}
+
+.panther-scanner {
+    width: 60px; height: 60px;
+    border: 4px solid var(--neon-gold);
+    border-radius: 50%;
+    position: relative;
+    animation: scan-pulse 2s infinite;
+}
+
+@keyframes scan-pulse {
+    0% { transform: scale(1); opacity: 1; box-shadow: 0 0 0 0 var(--neon-border); }
+    100% { transform: scale(1.1); opacity: 0; box-shadow: 0 0 0 20px rgba(0,0,0,0); }
+}
+
+.system-log { font-family: monospace; color: var(--neon-gold); font-size: 0.8rem; }
+
+/* --- MOBILE NAV (Táctica) --- */
+.jg-bottom-nav {
+    display: flex;
+    position: fixed; bottom: 0; left: 0; width: 100%;
+    height: 75px; background: rgba(10, 10, 10, 0.95);
+    backdrop-filter: blur(10px);
+    border-top: 2px solid var(--neon-gold);
+    justify-content: space-around; align-items: center;
+    z-index: 1000;
+}
+
+.b-nav-item {
+    text-decoration: none; color: #666; font-size: 0.7rem; font-weight: bold;
+}
+.b-nav-item.active { color: var(--neon-gold); text-shadow: 0 0 5px var(--neon-gold); }
+
+.btn-add-game {
+    width: 55px; height: 55px;
+    background: var(--neon-gold);
+    border: none; border-radius: 50%;
+    font-size: 2rem; font-weight: bold;
+    transform: translateY(-20px);
+    box-shadow: 0 5px 15px var(--neon-border);
+}
+
+/* --- NOTIFICACIÓN GODOT Style --- */
+.jg-notification {
+    position: fixed; top: -100px; left: 50%; transform: translateX(-50%);
+    background: var(--neon-gold); color: black;
+    padding: 15px 25px; border-radius: 8px; font-weight: bold;
+    z-index: 2000; transition: 0.5s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+}
+.jg-notification.show { top: 25px; }
+
+/* --- Grilla de Juegos --- */
+.jg-cyber-grid {
+    display: grid; grid-template-columns: 1fr; gap: 15px; margin-top: 20px;
 }
