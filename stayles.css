@@ -1,71 +1,20 @@
-/* --- Ajustes para Celulares --- */
-@media (max-width: 768px) {
-    .jg-title-text { font-size: 1.2rem; }
-    
-    .jg-hero-v2 {
-        flex-direction: column;
-        text-align: center;
-        padding: 40px 10px;
-    }
-
-    .jg-cyber-grid {
-        grid-template-columns: 1fr; /* Una sola columna en móvil */
-        padding: 10px;
-    }
-
-    .jg-nav-links { display: none; } /* Ocultamos nav superior en móvil */
-    
-    .jg-bottom-nav {
-        display: flex;
-        position: fixed;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        height: 60px;
-        background: rgba(5, 5, 5, 0.95);
-        backdrop-filter: blur(10px);
-        border-top: 1px solid var(--neon-gold);
-        justify-content: space-around;
-        align-items: center;
-        z-index: 2000;
-    }
-
-    .b-nav-item {
-        color: #888;
-        font-size: 0.7rem;
-        font-weight: bold;
-        text-decoration: none;
-    }
-
-    .b-nav-item.active { color: var(--neon-gold); }
+:root {
+    --neon-gold: #e0ac00;
+    --dark-bg: #050505;
+    --glass: rgba(20, 20, 25, 0.8);
+    --neon-border: rgba(224, 172, 0, 0.3);
 }
 
-/* --- Estilo de los Enlaces (Linktree Style) --- */
-.social-links-container {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    margin: 20px 0;
-}
-
-.link-node {
-    background: rgba(224, 172, 0, 0.05);
-    border: 1px solid var(--glass-border);
-    padding: 15px;
-    border-radius: 10px;
+body {
+    background-color: var(--dark-bg);
     color: #fff;
-    text-decoration: none;
-    display: flex;
-    align-items: center;
-    transition: 0.3s;
+    font-family: 'Segoe UI', sans-serif;
+    margin: 0;
+    padding-bottom: 80px; /* Espacio para la barra inferior */
 }
 
-.link-node:hover {
-    background: var(--neon-gold);
-    color: #000;
-}
+.jg-container { max-width: 1200px; margin: 0 auto; padding: 0 15px; }
 
-.node-icon { margin-right: 15px; }
-
-/* Evitar que el contenido se esconda tras la barra inferior */
-main { padding-bottom: 80px; }
+/* Header y Perfil */
+.jg-navbar {
+    background: var(--glass
