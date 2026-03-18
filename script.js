@@ -1,115 +1,183 @@
 /**
- * JOACOGAMES - Engine de Interfaz v2.0
- * Desarrollado para: Amigos y Familia
+ * JOACOGAMES - OS Core v3.0 (Edición Zero)
+ * Sistema de gestión de proyectos privado.
  */
 
-// 1. Base de Datos de la Red (Fácil de actualizar)
-const JOACO_DATABASE = [
-    {
-        id: 1,
-        title: "Counter-Strike 2",
-        category: "Táctico / FPS",
-        status: "ONLINE",
-        img: "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/730/capsule_616x353.jpg",
-        isHot: true,
-        version: "v1.5.2"
-    },
-    {
-        id: 2,
-        title: "Dota 2",
-        category: "MOBA / Estrategia",
-        status: "UPDATE READY",
-        img: "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/570/capsule_616x353.jpg",
-        isHot: false,
-        version: "v7.35"
-    },
-    {
-        id: 3,
-        title: "War Thunder",
-        category: "Simulación",
-        status: "ONLINE",
-        img: "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/236390/capsule_616x353.jpg",
-        isHot: true,
-        version: "Apex"
-    },
-    {
-        id: 4,
-        title: "Marvel Rivals",
-        category: "Shooter / Héroes",
-        status: "BETA ACCESS",
-        img: "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2767030/capsule_616x353.jpg",
-        isHot: true,
-        version: "JG-Mod"
-    }
-];
+// 1. Base de Datos Local (Inicia vacía por diseño)
+let JOACO_PROJECTS = [];
 
-// 2. Inyector de Contenido (Genera las tarjetas con tu estilo)
-const renderCyberGrid = () => {
+// 2. Renderizador de Interfaz (Controla qué se ve en pantalla)
+const updateInterface = () => {
     const grid = document.getElementById('gameGrid');
-    if (!grid) return;
-
-    grid.innerHTML = JOACO_DATABASE.map(game => `
-        <article class="jg-game-card-v2" data-id="${game.id}">
-            ${game.isHot ? '<div class="hot-tag">SISTEMA CRÍTICO</div>' : ''}
-            
-            <div class="img-container">
-                <img src="${game.img}" alt="${game.title}" class="jg-game-img">
-                <div class="scanline"></div>
-            </div>
-
-            <div class="jg-card-body">
-                <div class="card-meta">
-                    <span class="version-code">${game.version}</span>
-                    <span class="status-indicator ${game.status.toLowerCase().replace(' ', '-')}">${game.status}</span>
-                </div>
-                <h3 class="jg-game-title">${game.title}</h3>
-                <p class="jg-game-cat">${game.category}</p>
-                
-                <div class="card-actions">
-                    <button class="btn-launch" onclick="launchGame('${game.title}')">
-                        EJECUTAR_NÚCLEO
-                    </button>
-                </div>
-            </div>
-        </article>
-    `).join('');
-};
-
-// 3. Lógica de Interacción (Simulación de Sistema)
-window.launchGame = (name) => {
-    // Efecto de consola original
-    console.log(`%c [JOACOGAMES] Iniciando secuencia para: ${name}... `, 'background: #e0ac00; color: #000; font-weight: bold;');
+    const emptyState = document.getElementById('emptyState');
     
-    // Aquí podrías redirigir o abrir un modal
-    alert(`ACCESO CONCEDIDO: Iniciando ${name} en el servidor de Joaco.`);
+    if (!grid || !emptyState) return;
+
+    if (JOACO_PROJECTS.length === 0) {
+        // Mostrar mensaje de sistema vacío
+        grid.style.display = "none";
+        emptyState.style.display = "flex";
+    } else {
+        // Ocultar mensaje vacío y mostrar proyectos
+        emptyState.style.display = "none";
+        grid.style.display = "grid";
+        
+        grid.innerHTML = JOACO_PROJECTS.map((proj, index) => `
+            <article class="jg-game-card-v2" style="opacity: 1; transform: translateY(0);">
+                <div class="hot-tag">PROYECTO_ACTIVO</div>
+                <div class="img-container">
+                    <div class="placeholder-img" style="height: 180px; background: #111; display: flex; align-items: center; justify-content: center; color: #e0ac00; font-family: monospace;">
+                        [NODO_${index + 1}]
+                    </div>
+                    <div class="scanline"></div>
+                </div>
+                <div class="jg-card-body">
+                    <div class="card-meta">
+                        <span class="version-code">LOCAL_BUILD</span>
+                        <span class="status-indicator online">ESTABLE</span>
+                    </div>
+                    <h3 class="jg-game-title">${proj.title.toUpperCase()}</h3>
+                    <p class="jg-game-cat">Despliegue de JoacoGames</p>
+                    <div class="card-actions">
+                        <button class="btn-launch" onclick="launchProtocol('${proj.title}')">
+                            CONECTAR_NÚCLEO
+                        </button>
+                    </div>
+                </div>
+            </article>
+        `).join('');
+    }
 };
 
-// 4. Animación de Scroll y Aparición (Para que no sea aburrido)
-const revealOnScroll = () => {
-    const cards = document.querySelectorAll('.jg-game-card-v2');
-    cards.forEach((card, index) => {
-        setTimeout(() => {
-            card.style.opacity = "1";
-            card.style.transform = "translateY(0)";
-        }, index * 150); // Aparecen uno por uno en cascada
-    });
+// 3. Función para Inyectar Proyectos (Original e Interactivo)
+window.addNewGame = () => {
+    const projectName = prompt(">> ACCESO AL NÚCLEO: Ingrese el nombre del nuevo proyecto:");
+    
+    if (projectName && projectName.trim() !== "") {
+        console.log(`%c [SISTEMA] Inyectando datos: ${projectName}...`, 'color: #e0ac00; font-weight: bold;');
+        
+        JOACO_PROJECTS.push({
+            title: projectName,
+            timestamp: new Date().toLocaleTimeString()
+        });
+        
+        updateInterface();
+    }
 };
 
-// 5. Inicialización Global
+// 4. Protocolo de Lanzamiento
+window.launchProtocol = (name) => {
+    alert(`PROTOCOLOS DE SEGURIDAD ACTIVADOS:\nConectando con el servidor local para: ${name}`);
+    console.log(`%c [PROTOCOLO] Ejecutando instancia de ${name}`, 'color: #ff6a00');
+};
+
+// 5. Función Secreta: Modo Administrador (Original)
+let clickCount = 0;
+window.adminMode = () => {
+    clickCount++;
+    if (clickCount === 5) {
+        document.body.style.filter = "hue-rotate(180deg)";
+        console.warn("[SISTEMA] ¡MODO HACKER ACTIVADO! Cambiando espectro de color...");
+        alert("MODO ADMIN: Espectro de interfaz modificado.");
+        clickCount = 0;
+    }
+};
+
+// 6. Inicialización del Sistema
 document.addEventListener('DOMContentLoaded', () => {
-    console.log("JoacoGames OS: Inicializando componentes...");
+    console.log("%c JOACOGAMES OS v3.0 - CARGA COMPLETADA ", 'background: #000; color: #e0ac00; border: 1px solid #e0ac00;');
     
-    // Renderizamos la grilla
-    renderCyberGrid();
+    // El sistema arranca verificando el estado del núcleo
+    updateInterface();
+});/**
+ * JOACOGAMES - OS Core v3.0 (Edición Zero)
+ * Sistema de gestión de proyectos privado.
+ */
 
-    // Estilos iniciales para la animación de entrada
-    const cards = document.querySelectorAll('.jg-game-card-v2');
-    cards.forEach(c => {
-        c.style.opacity = "0";
-        c.style.transform = "translateY(30px)";
-        c.style.transition = "all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275)";
-    });
+// 1. Base de Datos Local (Inicia vacía por diseño)
+let JOACO_PROJECTS = [];
 
-    // Disparamos la aparición tras un breve delay
-    setTimeout(revealOnScroll, 500);
+// 2. Renderizador de Interfaz (Controla qué se ve en pantalla)
+const updateInterface = () => {
+    const grid = document.getElementById('gameGrid');
+    const emptyState = document.getElementById('emptyState');
+    
+    if (!grid || !emptyState) return;
+
+    if (JOACO_PROJECTS.length === 0) {
+        // Mostrar mensaje de sistema vacío
+        grid.style.display = "none";
+        emptyState.style.display = "flex";
+    } else {
+        // Ocultar mensaje vacío y mostrar proyectos
+        emptyState.style.display = "none";
+        grid.style.display = "grid";
+        
+        grid.innerHTML = JOACO_PROJECTS.map((proj, index) => `
+            <article class="jg-game-card-v2" style="opacity: 1; transform: translateY(0);">
+                <div class="hot-tag">PROYECTO_ACTIVO</div>
+                <div class="img-container">
+                    <div class="placeholder-img" style="height: 180px; background: #111; display: flex; align-items: center; justify-content: center; color: #e0ac00; font-family: monospace;">
+                        [NODO_${index + 1}]
+                    </div>
+                    <div class="scanline"></div>
+                </div>
+                <div class="jg-card-body">
+                    <div class="card-meta">
+                        <span class="version-code">LOCAL_BUILD</span>
+                        <span class="status-indicator online">ESTABLE</span>
+                    </div>
+                    <h3 class="jg-game-title">${proj.title.toUpperCase()}</h3>
+                    <p class="jg-game-cat">Despliegue de JoacoGames</p>
+                    <div class="card-actions">
+                        <button class="btn-launch" onclick="launchProtocol('${proj.title}')">
+                            CONECTAR_NÚCLEO
+                        </button>
+                    </div>
+                </div>
+            </article>
+        `).join('');
+    }
+};
+
+// 3. Función para Inyectar Proyectos (Original e Interactivo)
+window.addNewGame = () => {
+    const projectName = prompt(">> ACCESO AL NÚCLEO: Ingrese el nombre del nuevo proyecto:");
+    
+    if (projectName && projectName.trim() !== "") {
+        console.log(`%c [SISTEMA] Inyectando datos: ${projectName}...`, 'color: #e0ac00; font-weight: bold;');
+        
+        JOACO_PROJECTS.push({
+            title: projectName,
+            timestamp: new Date().toLocaleTimeString()
+        });
+        
+        updateInterface();
+    }
+};
+
+// 4. Protocolo de Lanzamiento
+window.launchProtocol = (name) => {
+    alert(`PROTOCOLOS DE SEGURIDAD ACTIVADOS:\nConectando con el servidor local para: ${name}`);
+    console.log(`%c [PROTOCOLO] Ejecutando instancia de ${name}`, 'color: #ff6a00');
+};
+
+// 5. Función Secreta: Modo Administrador (Original)
+let clickCount = 0;
+window.adminMode = () => {
+    clickCount++;
+    if (clickCount === 5) {
+        document.body.style.filter = "hue-rotate(180deg)";
+        console.warn("[SISTEMA] ¡MODO HACKER ACTIVADO! Cambiando espectro de color...");
+        alert("MODO ADMIN: Espectro de interfaz modificado.");
+        clickCount = 0;
+    }
+};
+
+// 6. Inicialización del Sistema
+document.addEventListener('DOMContentLoaded', () => {
+    console.log("%c JOACOGAMES OS v3.0 - CARGA COMPLETADA ", 'background: #000; color: #e0ac00; border: 1px solid #e0ac00;');
+    
+    // El sistema arranca verificando el estado del núcleo
+    updateInterface();
 });
