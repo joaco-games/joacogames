@@ -1,26 +1,79 @@
-<main class="jg-dashboard">
-    <section class="epic-featured">
-        <div class="featured-card">
-            <img src="images/banner_juaco.jpg" class="featured-img">
-            <div class="featured-info">
-                <span class="tag-exclusivo">EXCLUSIVO DE JOACO</span>
-                <h2>Age of the Dead Master</h2>
-                <p>Explora el multiverso en esta mezcla épica de estrategia y aventura.</p>
-                <div class="featured-btns">
-                    <button class="btn-steam-style" onclick="registrarPartida(true)">JUGAR AHORA</button>
-                    <button class="btn-epic-style">+ A MI LISTA</button>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>JoacoGames | OS</title>
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#e0ac00">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="jg-cyber-dark">
+
+    <div id="notificacionLogro" class="jg-notification">
+        <span id="logroTitulo">🏆 LOGRO DESBLOQUEADO</span>
+    </div>
+
+    <header class="jg-navbar">
+        <div class="jg-container nav-flex">
+            <div class="jg-brand" onclick="adminMode()">
+                <img src="images/panther_logo.png" alt="JG" class="logo-img">
+                <h1 class="jg-title">JOACO<span>GAMES</span></h1>
+            </div>
+            <div class="user-stats">
+                <div class="stats-info">
+                    <span id="userLevel">Nivel 1</span>
+                    <span id="userPoints">0 XP</span>
+                </div>
+                <img src="images/avatar_joaco.jpg" class="avatar">
+            </div>
+        </div>
+    </header>
+
+    <main class="jg-main">
+        <section class="epic-hero">
+            <div class="featured-card">
+                <img src="images/banner_juaco.jpg" class="hero-bg">
+                <div class="hero-content">
+                    <span class="badge">DESTACADO</span>
+                    <h2>Age of the Dead Master</h2>
+                    <p>Mezcla táctica de estrategia y supervivencia.</p>
+                    <button class="btn-launch" onclick="registrarPartida(true)">EJECUTAR PROTOCOLO</button>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <section class="steam-status-bar container">
-        <div class="xp-progress-container">
-            <div class="xp-label">PROGRESO DE NIVEL</div>
-            <div class="xp-bar-bg">
-                <div id="xpFill" class="xp-bar-fill"></div>
+        <section class="steam-progress container">
+            <div class="xp-header">
+                <span>PROGRESO DEL SISTEMA</span>
+                <span id="xpText">0 / 500 XP</span>
             </div>
-            <div id="xpText">250 / 500 XP para Nivel 2</div>
-        </div>
-    </section>
-</main>
+            <div class="progress-bar">
+                <div id="xpFill" class="fill"></div>
+            </div>
+        </section>
+
+        <section class="links-section container">
+            <h3>NODOS DE CONEXIÓN</h3>
+            <div class="grid-links">
+                <a href="https://linktr.ee/joacogames" class="node">🔗 LINKTREE</a>
+                <a href="#" class="node">💬 DISCORD</a>
+            </div>
+        </section>
+    </main>
+
+    <nav class="mobile-nav">
+        <div class="nav-item active">NÚCLEO</div>
+        <button class="nav-add" onclick="addNewGame()">+</button>
+        <div class="nav-item">REDES</div>
+    </nav>
+
+    <script src="script.js"></script>
+    <script>
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('sw.js');
+        }
+    </script>
+</body>
+</html>
