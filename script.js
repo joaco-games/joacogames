@@ -1,91 +1,98 @@
-// --- Datos Simulados de Juegos de JoacoGames ---
-// Puedes editar esta lista para que coincida con tus juegos reales
-const gamesData = [
-    {
-        title: "Dota 2 (El Inmortal)",
-        genre: ["MOBA", "Estrategia"],
-        price: "Gratis",
-        isNew: false,
-        image: "images/game1_thumb.jpg", // Reemplaza con tus imágenes reales
-        link: "https://store.steampowered.com/app/570/"
-    },
-    {
-        title: "Counter-Strike 2 (Red Joaco)",
-        genre: ["Shooter", "Táctico"],
-        price: "Gratis",
-        isNew: true,
-        image: "images/game2_thumb.jpg",
-        link: "https://store.steampowered.com/app/730/"
-    },
-    {
-        title: "Apex Legends™ - Versión JG",
-        genre: ["Battle Royale", "Acción"],
-        price: "Gratis",
-        isNew: false,
-        image: "images/game3_thumb.jpg",
-        link: "https://store.steampowered.com/app/1172470/"
-    },
-     {
-        title: "War Thunder (Joaco Edition)",
-        genre: ["Simulación", "Vehículos"],
-        price: "Gratis",
-        isNew: false,
-        image: "images/game4_thumb.jpg",
-        link: "https://store.steampowered.com/app/236390/"
-    },
-     {
-        title: "Overwatch® 2 - Servidor Local",
-        genre: ["Shooter", "Héroes"],
-        price: "Gratis",
-        isNew: true,
-        image: "images/game5_thumb.jpg",
-        link: "https://store.steampowered.com/app/2357570/"
-    },
-];
+/**
+ * JOACOGAMES ENGINE - Sincronizado con Godot v3.5.3
+ */
 
-// --- Función para Cargar la Cuadrícula de Juegos ---
-function loadGameGrid() {
-    const gridContainer = document.getElementById('gameGrid');
-    if (!gridContainer) return;
+let usuario = {
+    puntos: 0,
+    nivel: 1,
+    partidas: 0,
+    victorias_seguidas: 0,
+    logros: {
+        "novato": { titulo: "Primer Paso", ganado: false },
+        "racha": { titulo: "Racha de Fuego", ganado: false }
+    }
+};
 
-    // Limpia el cargador
-    gridContainer.innerHTML = '';
+let misProyectos = [];
 
-    gamesData.forEach(game => {
-        const cardHTML = `
-            <div class="jg-game-card">
-                ${game.isNew ? '<span class="jg-new-badge">NUEVO</span>' : ''}
-                <img src="${game.image}" alt="${game.title}" class="jg-game-thumb">
-                <div class="jg-card-info">
-                    <h4 class="jg-game-title">${game.title}</h4>
-                    <div class="jg-game-details">
-                        <div class="jg-game-genres">
-                            ${game.genre.map(g => `<span class="jg-genre-tag">${g}</span>`).join('')}
-                        </div>
-                        <span class="jg-game-price">${game.price}</span>
-                    </div>
-                </div>
-                <a href="${game.link}" target="_blank" class="jg-card-link-overlay"></a>
+// Función registrar_partida (Lógica de tu código Godot)
+function registrarPartida(gano) {
+    usuario.partidas += 1;
+    if (gano) {
+        usuario.victorias_seguidas += 1;
+        usuario.puntos += 100;
+    } else {
+        usuario.victorias_seguidas = 0;
+        usuario.puntos += 20;
+    }
+
+    // Subida de nivel (cada 500 XP)
+    usuario.nivel = Math.floor(usuario.puntos / 500) + 1;
+    
+    chequearLogros();
+    actualizarInterfaz();
+    guardarProgreso();
+}
+
+function chequearLogros() {
+    if (usuario.partidas >= 1 && !usuario.logros.novato.ganado) {
+        desbloquearLogro("novato");
+    }
+    if (usuario.victorias_seguidas >= 3 && !usuario.logros.racha.ganado) {
+        desbloquearLogro("racha");
+    }
+}
+
+function desbloquearLogro(id) {
+    usuario.logros[id].ganado = true;
+    const panel = document.getElementById("notificacionLogro");
+    document.getElementById("logroTitulo").innerText = "🏆 " + usuario.logros[id].titulo;
+    panel.classList.add("show");
+    setTimeout(() => panel.classList.remove("show"), 3000);
+}
+
+function actualizarInterfaz() {
+    document.getElementById("userLevel").innerText = `Nivel ${usuario.nivel}`;
+    document.getElementById("userPoints").innerText = `${usuario.puntos} XP`;
+    document.getElementById("novedadesText").innerText = "🔥 SISTEMA ACTUALIZADO";
+}
+
+function addNewGame() {
+    const name = prompt(">> Inyectar nuevo proyecto al núcleo:");
+    if (name) {
+        misProyectos.push(name.toUpperCase());
+        renderProyectos();
+    }
+}
+
+function renderProyectos() {
+    const grid = document.getElementById("gameGrid");
+    const empty = document.getElementById("emptyState");
+    
+    if (misProyectos.length > 0) {
+        empty.style.display = "none";
+        grid.innerHTML = misProyectos.map(p => `
+            <div class="link-node" onclick="registrarPartida(true)">
+                <div style="font-size: 0.6rem; color: #e0ac00;">PROYECTO_ACTIVO</div>
+                ${p}
             </div>
-        `;
-        gridContainer.innerHTML += cardHTML;
-    });
+        `).join('');
+    }
 }
 
-// --- Gestión de Estado de Navegación ---
-function setupNavStatus() {
-    const navLinks = document.querySelectorAll('.jg-main-nav a');
-    navLinks.forEach(link => {
-        link.addEventListener('click', function() {
-            navLinks.forEach(nl => nl.classList.remove('active'));
-            this.classList.add('active');
-        });
-    });
+// Persistencia de datos en celular
+function guardarProgreso() {
+    localStorage.setItem('JoacoGames_Data', JSON.stringify(usuario));
 }
 
-// --- Inicialización ---
-document.addEventListener('DOMContentLoaded', () => {
-    // Pequeño retraso para simular la "carga de red"
-    setTimeout(loadGameGrid, 800);
-    setupNavStatus();
+function cargarProgreso() {
+    const data = localStorage.getItem('JoacoGames_Data');
+    if (data) {
+        usuario = JSON.parse(data);
+        actualizarInterfaz();
+    }
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+    cargarProgreso();
 });
