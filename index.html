@@ -1,113 +1,26 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <title>TrucoStack Store</title>
-  <link rel="stylesheet" href="styles.css">
-</head>
-<body>
+<main class="jg-dashboard">
+    <section class="epic-featured">
+        <div class="featured-card">
+            <img src="images/banner_juaco.jpg" class="featured-img">
+            <div class="featured-info">
+                <span class="tag-exclusivo">EXCLUSIVO DE JOACO</span>
+                <h2>Age of the Dead Master</h2>
+                <p>Explora el multiverso en esta mezcla épica de estrategia y aventura.</p>
+                <div class="featured-btns">
+                    <button class="btn-steam-style" onclick="registrarPartida(true)">JUGAR AHORA</button>
+                    <button class="btn-epic-style">+ A MI LISTA</button>
+                </div>
+            </div>
+        </div>
+    </section>
 
-<header>
-  <h1>🎮 TrucoStack Store</h1>
-  <input type="text" id="search" placeholder="Buscar juegos...">
-</header>
-
-<!-- 🔥 HERO -->
-<section class="hero">
-  <h2>Juegos rápidos. Competencia real.</h2>
-  <p>Una plataforma de juegos sociales creada para vos y tus amigos.</p>
-</section>
-
-<!-- 🔥 VISIÓN -->
-<section class="vision">
-
-  <h2>🎮 Más que una tienda, una experiencia</h2>
-
-  <p>
-    Si solo tenés una “Steam vacía + redes”, la gente entra… y se va.<br>
-    Lo que buscamos es crear una experiencia, no solo una página.
-  </p>
-
-  <div class="vision-core">
-    <h3>👉 Nuestra misión</h3>
-    <ul>
-      <li>🔥 Retener jugadores</li>
-      <li>💬 Generar interacción</li>
-      <li>🔁 Hacer que vuelvan</li>
-    </ul>
-  </div>
-
-  <div class="features">
-
-    <div class="feature">
-      <h3>🧑‍💻 Perfil de usuario</h3>
-      <p>Nombre, avatar, juegos jugados y ranking.</p>
-    </div>
-
-    <div class="feature">
-      <h3>🧠 Sistema de progreso</h3>
-      <p>Puntos, niveles y logros desbloqueables.</p>
-    </div>
-
-    <div class="feature">
-      <h3>🎮 Biblioteca</h3>
-      <p>Tus juegos, recientes y favoritos.</p>
-    </div>
-
-    <div class="feature">
-      <h3>⭐ Feedback</h3>
-      <p>Likes, comentarios y encuestas.</p>
-    </div>
-
-    <div class="feature">
-      <h3>🧑‍🤝‍🧑 Social</h3>
-      <p>Ranking entre amigos y compartir.</p>
-    </div>
-
-    <div class="feature">
-      <h3>📊 Dashboard</h3>
-      <p>Datos de uso y rendimiento.</p>
-    </div>
-
-    <div class="feature">
-      <h3>🚀 Actualizaciones</h3>
-      <p>Nuevos juegos y mejoras constantes.</p>
-    </div>
-
-  </div>
-
-  <div class="identity">
-    <h3>💣 Nuestra identidad</h3>
-    <p>Juegos híbridos únicos (Truco + Uno).</p>
-  </div>
-
-  <div class="mindset">
-    <h3>🧠 Mentalidad</h3>
-    <p>No es una web. Es un ecosistema.</p>
-  </div>
-
-</section>
-
-<!-- 🎮 JUEGOS -->
-<main id="game-container"></main>
-
-<!-- 🌐 REDES -->
-<section class="social-section">
-  <h2>🌐 Comunidad</h2>
-
-  <div class="social-links">
-    <a href="https://instagram.com/TU_USUARIO" target="_blank">📸 Instagram</a>
-    <a href="https://discord.gg/TU_LINK" target="_blank">💬 Discord</a>
-    <a href="https://youtube.com/TU_CANAL" target="_blank">▶️ YouTube</a>
-    <a href="https://github.com/TU_USUARIO" target="_blank">💻 GitHub</a>
-    <a href="https://linktr.ee/TU_LINKTREE" target="_blank">🔗 Linktree</a>
-  </div>
-</section>
-
-<footer>
-  <p>© 2026 TrucoStack</p>
-</footer>
-
-<script src="script.js"></script>
-</body>
-</html>
+    <section class="steam-status-bar container">
+        <div class="xp-progress-container">
+            <div class="xp-label">PROGRESO DE NIVEL</div>
+            <div class="xp-bar-bg">
+                <div id="xpFill" class="xp-bar-fill"></div>
+            </div>
+            <div id="xpText">250 / 500 XP para Nivel 2</div>
+        </div>
+    </section>
+</main>
