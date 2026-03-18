@@ -1,73 +1,113 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>JoacoGames | Central de Mando</title>
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8">
+  <title>TrucoStack Store</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
-<body class="jg-cyber-dark">
-    <div class="bg-overlay"></div>
+<body>
 
-    <header class="jg-navbar">
-        <div class="jg-container header-flex">
-            <div class="jg-brand-hub" onclick="adminMode()">
-                <div class="panther-hex"><img src="images/panther_logo.png" alt="JG"></div>
-                <h1 class="jg-title-text">JOACO<span>GAMES</span></h1>
-            </div>
-            
-            <div class="jg-profile-pill">
-                <div class="stats-text">
-                    <span id="userLevel">Nivel 1</span>
-                    <span id="userPoints">0 XP</span>
-                </div>
-                <img src="images/avatar_joaco.jpg" alt="Admin" class="jg-user-img">
-            </div>
-        </div>
-    </header>
+<header>
+  <h1>🎮 TrucoStack Store</h1>
+  <input type="text" id="search" placeholder="Buscar juegos...">
+</header>
 
-    <main class="jg-dashboard">
-        <div id="notificacionLogro" class="jg-notification">
-            <span id="logroTitulo">🏆 ¡LOGRO DESBLOQUEADO!</span>
-        </div>
+<!-- 🔥 HERO -->
+<section class="hero">
+  <h2>Juegos rápidos. Competencia real.</h2>
+  <p>Una plataforma de juegos sociales creada para vos y tus amigos.</p>
+</section>
 
-        <section class="jg-hero">
-            <div class="hero-banner-container">
-                <img src="images/banner_juaco.jpg" alt="JoacoGames Banner" class="main-banner">
-                <div class="hero-overlay">
-                    <span class="badge-new" id="novedadesText">🔥 CARGANDO NÚCLEO...</span>
-                    <h2>Tu Red Privada de Juegos</h2>
-                    <button class="btn-primary-neon" onclick="registrarPartida(true)">INICIAR SIMULACIÓN</button>
-                </div>
-            </div>
-        </section>
+<!-- 🔥 VISIÓN -->
+<section class="vision">
 
-        <section class="jg-network-hub container">
-            <h3 class="section-title">Nodos de Conexión</h3>
-            <div class="social-grid">
-                <a href="https://linktr.ee/joacogames" target="_blank" class="link-node">🔗 LINKTREE_HUB</a>
-                <a href="https://instagram.com/tu_user" target="_blank" class="link-node">📸 INSTAGRAM_LOG</a>
-                <a href="https://discord.gg/tu_link" target="_blank" class="link-node">💬 DISCORD_SRV</a>
-            </div>
-        </section>
+  <h2>🎮 Más que una tienda, una experiencia</h2>
 
-        <section class="jg-grid-section container">
-            <h3 class="section-title">Proyectos en el Sector</h3>
-            <div id="emptyState" class="jg-empty-state">
-                <div class="scanner-line"></div>
-                <p>ESPERANDO ORDENES DEL ADMINISTRADOR</p>
-                <span class="system-log">> No se detectan juegos comerciales en este sector.</span>
-            </div>
-            <div class="jg-cyber-grid" id="gameGrid"></div>
-        </section>
-    </main>
+  <p>
+    Si solo tenés una “Steam vacía + redes”, la gente entra… y se va.<br>
+    Lo que buscamos es crear una experiencia, no solo una página.
+  </p>
 
-    <nav class="jg-bottom-nav">
-        <a href="#" class="b-nav-item active">NÚCLEO</a>
-        <button onclick="addNewGame()" class="btn-add-game">+</button>
-        <a href="#" class="b-nav-item">PERFIL</a>
-    </nav>
+  <div class="vision-core">
+    <h3>👉 Nuestra misión</h3>
+    <ul>
+      <li>🔥 Retener jugadores</li>
+      <li>💬 Generar interacción</li>
+      <li>🔁 Hacer que vuelvan</li>
+    </ul>
+  </div>
 
-    <script src="script.js"></script>
+  <div class="features">
+
+    <div class="feature">
+      <h3>🧑‍💻 Perfil de usuario</h3>
+      <p>Nombre, avatar, juegos jugados y ranking.</p>
+    </div>
+
+    <div class="feature">
+      <h3>🧠 Sistema de progreso</h3>
+      <p>Puntos, niveles y logros desbloqueables.</p>
+    </div>
+
+    <div class="feature">
+      <h3>🎮 Biblioteca</h3>
+      <p>Tus juegos, recientes y favoritos.</p>
+    </div>
+
+    <div class="feature">
+      <h3>⭐ Feedback</h3>
+      <p>Likes, comentarios y encuestas.</p>
+    </div>
+
+    <div class="feature">
+      <h3>🧑‍🤝‍🧑 Social</h3>
+      <p>Ranking entre amigos y compartir.</p>
+    </div>
+
+    <div class="feature">
+      <h3>📊 Dashboard</h3>
+      <p>Datos de uso y rendimiento.</p>
+    </div>
+
+    <div class="feature">
+      <h3>🚀 Actualizaciones</h3>
+      <p>Nuevos juegos y mejoras constantes.</p>
+    </div>
+
+  </div>
+
+  <div class="identity">
+    <h3>💣 Nuestra identidad</h3>
+    <p>Juegos híbridos únicos (Truco + Uno).</p>
+  </div>
+
+  <div class="mindset">
+    <h3>🧠 Mentalidad</h3>
+    <p>No es una web. Es un ecosistema.</p>
+  </div>
+
+</section>
+
+<!-- 🎮 JUEGOS -->
+<main id="game-container"></main>
+
+<!-- 🌐 REDES -->
+<section class="social-section">
+  <h2>🌐 Comunidad</h2>
+
+  <div class="social-links">
+    <a href="https://instagram.com/TU_USUARIO" target="_blank">📸 Instagram</a>
+    <a href="https://discord.gg/TU_LINK" target="_blank">💬 Discord</a>
+    <a href="https://youtube.com/TU_CANAL" target="_blank">▶️ YouTube</a>
+    <a href="https://github.com/TU_USUARIO" target="_blank">💻 GitHub</a>
+    <a href="https://linktr.ee/TU_LINKTREE" target="_blank">🔗 Linktree</a>
+  </div>
+</section>
+
+<footer>
+  <p>© 2026 TrucoStack</p>
+</footer>
+
+<script src="script.js"></script>
 </body>
 </html>
