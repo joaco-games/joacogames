@@ -2,109 +2,165 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>JoacoGames | OS v1.0</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JOACOGAMES | NÚCLEO</title>
+    <style>
+        :root {
+            --epic-blue: #0078f2;
+            --steam-dark: #171a21;
+            --steam-gradient: linear-gradient(135deg, #2a475e 0%, #1b2838 100%);
+            --accent-gold: #c7d5e0;
+        }
 
-    <link rel="manifest" href="manifest.json">
-    <meta name="mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-title" content="JoacoGames">
-    <meta name="theme-color" content="#e0ac00">
+        body {
+            background-color: #121212; /* Fondo Epic */
+            color: white;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
 
-    <link rel="apple-touch-icon" href="images/panther_logo.png">
-    <link rel="stylesheet" href="styles.css">
+        #launcher-container {
+            width: 900px;
+            background: var(--steam-dark);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            border: 1px solid #333;
+        }
+
+        header {
+            background: var(--steam-gradient);
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid var(--epic-blue);
+        }
+
+        .user-stats {
+            text-align: right;
+        }
+
+        .xp-bar {
+            width: 200px;
+            height: 8px;
+            background: #333;
+            border-radius: 4px;
+            margin-top: 5px;
+        }
+
+        .xp-progress {
+            width: 45%; /* Dinámico */
+            height: 100%;
+            background: var(--epic-blue);
+            box-shadow: 0 0 10px var(--epic-blue);
+        }
+
+        nav {
+            background: #202020;
+            padding: 10px 20px;
+        }
+
+        nav a {
+            color: var(--accent-gold);
+            text-decoration: none;
+            margin-right: 20px;
+            font-weight: bold;
+            font-size: 0.9em;
+        }
+
+        nav a:hover { color: white; }
+
+        main {
+            padding: 30px;
+        }
+
+        .card {
+            background: #2a2a2a;
+            padding: 20px;
+            border-radius: 4px;
+            border-left: 4px solid var(--epic-blue);
+        }
+
+        .btn-victory {
+            background: var(--epic-blue);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            font-weight: bold;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: 0.3s;
+            text-transform: uppercase;
+        }
+
+        .btn-victory:hover {
+            transform: scale(1.05);
+            filter: brightness(1.2);
+        }
+
+        .footer-sync {
+            background: #101010;
+            padding: 10px 20px;
+            font-size: 0.8em;
+            color: #666;
+            display: flex;
+            justify-content: space-between;
+        }
+    </style>
 </head>
-<body class="jg-cyber-dark">
+<body>
 
-    <div id="notificacionLogro" class="jg-notification">
-        <span id="logroTitulo">🏆 LOGRO DESBLOQUEADO</span>
-    </div>
-
-    <header class="jg-navbar">
-        <div class="jg-container nav-flex">
-            <div class="jg-brand" onclick="adminMode()">
-                <div class="panther-hex">
-                    <img src="images/panther_logo.png" alt="JG Logo" class="logo-img">
-                </div>
-                <h1 class="jg-title">JOACO<span>GAMES</span></h1>
-            </div>
-            <div class="user-stats">
-                <div class="stats-info">
-                    <span id="userLevel">Nivel 1</span>
-                    <span id="userPoints">0 XP</span>
-                </div>
-                <img src="images/avatar_joaco.jpg" class="avatar" alt="Admin">
-            </div>
+<div id="launcher-container">
+    <header>
+        <div>
+            <h1 style="margin:0; letter-spacing: 2px;">JOACOGAMES</h1>
+            <span style="font-size: 0.7em; color: var(--epic-blue);">SISTEMA ACTIVO v2.0</span>
+        </div>
+        <div class="user-stats">
+            <strong>ADMIN</strong> <br>
+            <span style="font-size: 0.8em;">NIVEL 1</span>
+            <div class="xp-bar"><div class="xp-progress"></div></div>
         </div>
     </header>
 
-    <main class="jg-main">
-        <section class="epic-hero container">
-            <div class="featured-card">
-                <img src="images/banner_juaco.jpg" class="hero-bg" alt="Banner Principal">
-                <div class="hero-content">
-                    <span class="badge">SISTEMA PRIVADO</span>
-                    <h2>Age of the Dead Master</h2>
-                    <p>Mezcla táctica de estrategia y supervivencia en base a Grim Fandango y Age of Empires.</p>
-                    <button class="btn-launch" onclick="registrarPartida(true)">EJECUTAR PROTOCOLO (+100 XP)</button>
-                </div>
-            </div>
-        </section>
-
-        <section class="steam-progress container">
-            <div class="xp-header">
-                <span>ESTADO DEL NÚCLEO</span>
-                <span id="xpText">0 / 500 XP para Nivel 2</span>
-            </div>
-            <div class="progress-bar">
-                <div id="xpFill" class="fill"></div>
-            </div>
-        </section>
-
-        <section class="jg-grid-section container">
-            <div class="section-header">
-                <h3>PROYECTOS Y DESPLIEGUES</h3>
-                <div class="jg-line-decorator"></div>
-            </div>
-            
-            <div class="jg-empty-state" id="emptyState">
-                <div class="panther-scanner"></div>
-                <div class="empty-text">
-                    <h3>SINCRONIZACIÓN COMPLETADA</h3>
-                    <p>Esperando órdenes del administrador para inyectar proyectos.</p>
-                </div>
-            </div>
-
-            <div class="jg-cyber-grid" id="gameGrid"></div>
-        </section>
-
-        <section class="links-section container">
-            <h3>NODOS DE RED</h3>
-            <div class="grid-links">
-                <a href="https://linktr.ee/joacogames" class="node">🔗 LINKTREE</a>
-                <a href="#" class="node">💬 DISCORD</a>
-                <a href="#" class="node">📸 INSTAGRAM</a>
-            </div>
-        </section>
-    </main>
-
-    <nav class="mobile-nav">
-        <div class="nav-item active">NÚCLEO</div>
-        <button class="nav-add" onclick="addNewGame()">+</button>
-        <div class="nav-item">REDES</div>
+    <nav>
+        <a href="#">NÚCLEO</a>
+        <a href="#">BIBLIOTECA</a>
+        <a href="#">RED SOCIAL</a>
+        <a href="#">SOPORTE</a>
     </nav>
 
-    <script src="script.js"></script>
-    <script>
-        // Registro del Service Worker para instalación y modo offline
-        if ('serviceWorker' in navigator) {
-            window.addEventListener('load', () => {
-                navigator.serviceWorker.register('./sw.js')
-                    .then(reg => console.log('%c [SISTEMA] Nodo JoacoGames vinculado ', 'color: #e0ac00; font-weight: bold;'))
-                    .catch(err => console.log('ERROR: Fallo en la conexión del núcleo', err));
-            });
-        }
-    </script>
+    <main>
+        <section class="card">
+            <h2>NÚCLEO DE MANDO</h2>
+            <p style="color: #aaa;">Plataforma privada para la familia y amigos de JoacoGames.</p>
+            <button class="btn-victory" onclick="simular()">SIMULAR VICTORIA (+100 XP)</button>
+        </section>
+
+        <h3 style="margin-top: 30px;">CONEXIONES</h3>
+        <div style="display: flex; gap: 10px;">
+            <code style="background: #000; padding: 5px;">DISCORD_SRV</code>
+            <code style="background: #000; padding: 5px;">INTEL_GRAM</code>
+        </div>
+    </main>
+
+    <div class="footer-sync">
+        <span>BASE DE DATOS: CONECTADA</span>
+        <span>SINCRONIZACIÓN COMPLETADA 100%</span>
+    </div>
+</div>
+
+<script>
+    function simular() {
+        alert("Sincronizando datos con el servidor central...");
+        // Aquí podrías añadir lógica para aumentar el ancho de .xp-progress
+    }
+</script>
+
 </body>
 </html>
