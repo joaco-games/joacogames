@@ -2,113 +2,71 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JoacoGames :: Tu Plataforma de Juegos de Confianza</title>
-    <link rel="icon" type="image/x-icon" href="images/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>JoacoGames | Central de Mando</title>
     <link rel="stylesheet" href="styles.css">
 </head>
-<body class="jg-dark-theme">
+<body class="jg-cyber-dark">
+    <div class="bg-overlay"></div>
 
-    <header class="jg-header">
-        <div class="container jg-nav-container">
-            <div class="jg-brand">
-                <img src="images/panther_logo.png" alt="JoacoGames Panther Logo" class="jg-logo">
-                <span class="jg-brand-name">JOACO<span class="jg-accent">GAMES</span></span>
+    <header class="jg-navbar">
+        <div class="jg-container header-flex">
+            <div class="jg-brand-hub" onclick="adminMode()">
+                <div class="panther-hex"><img src="images/panther_logo.png" alt="JG"></div>
+                <h1 class="jg-title-text">JOACO<span>GAMES</span></h1>
             </div>
-            <nav class="jg-main-nav">
-                <ul>
-                    <li><a href="#" class="active">TIENDA</a></li>
-                    <li><a href="#">COMUNIDAD</a></li>
-                    <li><a href="#">MI BIBLIOTECA</a></li>
-                    <li><a href="#">SOPORTE</a></li>
-                </ul>
-            </nav>
-            <div class="jg-user-actions">
-                <button class="jg-btn-install">
-                    <svg viewBox="0 0 24 24" class="jg-icon-svg"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 14H11V8H13V16zM12.5 7.5c-.28 0-.5-.22-.5-.5V5c0-.28.22-.5.5-.5s.5.22.5.5v2c0 .28-.22.5-.5.5z" fill="white"/></svg>
-                    INSTALAR
-                </button>
-                <div class="jg-user-profile">
-                    <img src="images/avatar_joaco.jpg" alt="Joaco Avatar" class="jg-avatar-circle">
-                    <span class="jg-username">Joaco<span class="jg-status-dot online"></span></span>
-                    <button class="jg-logout-btn">Salir</button>
+            
+            <div class="jg-profile-pill">
+                <div class="stats-text">
+                    <span id="userLevel">Nivel 1</span>
+                    <span id="userPoints">0 XP</span>
                 </div>
+                <img src="images/avatar_joaco.jpg" alt="Admin" class="jg-user-img">
             </div>
         </div>
     </header>
 
-    <div class="jg-subheader">
-        <div class="container jg-subnav-container">
-            <nav class="jg-category-nav">
-                <a href="#">Novedades</a>
-                <a href="#">Multijugador (Familia)</a>
-                <a href="#">Cooperativo</a>
-                <a href="#">Indie</a>
-                <a href="#">RV</a>
-            </nav>
-            <div class="jg-search-bar">
-                <input type="text" placeholder="Buscar juego de Joaco...">
-                <button type="submit">🔍</button>
-            </div>
+    <main class="jg-dashboard">
+        <div id="notificacionLogro" class="jg-notification">
+            <span id="logroTitulo">🏆 ¡LOGRO DESBLOQUEADO!</span>
         </div>
-    </div>
 
-    <main class="jg-main-content">
-        <section class="jg-hero-section">
-            <div class="jg-hero-banner" style="background-image: url('images/banner_main.jpg');">
-                <div class="jg-overlay"></div>
-                <div class="jg-brand-element jg-floating-panther">
-                    <svg class="jg-panther-svg" viewBox="0 0 100 100">
-                        <path class="jg-panther-body" d="M10 50 A 40 40 0 1 1 90 50 L 50 90 Z" fill="none" stroke="#e0ac00" stroke-width="2" />
-                        <path class="jg-panther-circuits" d="M30 40 L 70 40 M 30 60 L 70 60 M 50 20 L 50 80" stroke="#ffd700" stroke-width="1" />
-                    </svg>
-                </div>
-                <div class="container jg-hero-text">
-                    <h1>RECOMENDACIÓN DESTACADA</h1>
-                    <h2>El Próximo Favorito de la Familia</h2>
+        <section class="jg-hero">
+            <div class="hero-banner-container">
+                <img src="images/banner_juaco.jpg" alt="JoacoGames Banner" class="main-banner">
+                <div class="hero-overlay">
+                    <span class="badge-new" id="novedadesText">🔥 CARGANDO NÚCLEO...</span>
+                    <h2>Tu Red Privada de Juegos</h2>
+                    <button class="btn-primary-neon" onclick="registrarPartida(true)">INICIAR SIMULACIÓN</button>
                 </div>
             </div>
         </section>
 
-        <section class="jg-featured-games container">
-            <h3>Juegos Populares de la Red Joaco</h3>
-            <div class="jg-game-grid" id="gameGrid">
-                <div class="jg-loader">Invocando a la pantera...</div>
+        <section class="jg-network-hub container">
+            <h3 class="section-title">Nodos de Conexión</h3>
+            <div class="social-grid">
+                <a href="https://linktr.ee/joacogames" target="_blank" class="link-node">🔗 LINKTREE_HUB</a>
+                <a href="https://instagram.com/tu_user" target="_blank" class="link-node">📸 INSTAGRAM_LOG</a>
+                <a href="https://discord.gg/tu_link" target="_blank" class="link-node">💬 DISCORD_SRV</a>
             </div>
         </section>
-        
-        <aside class="jg-friends-sidebar container">
-            <div class="jg-friends-header">
-                <h3>Red Amigos & Familia</h3>
-                <span class="jg-online-count">11 online</span>
-            </div>
-            <div class="jg-friends-list">
-                <div class="jg-friend online">
-                    <img src="https://via.placeholder.com/32" alt="Friend" class="jg-avatar-32">
-                    <span class="friend-name">Tío Pedro</span>
-                </div>
-                <div class="jg-friend online">
-                    <img src="https://via.placeholder.com/32" alt="Friend" class="jg-avatar-32">
-                    <span class="friend-name">Marta_Supernova</span>
-                </div>
-                 <div class="jg-friend offline">
-                    <img src="https://via.placeholder.com/32" alt="Friend" class="jg-avatar-32">
-                    <span class="friend-name">PrimoSofi</span>
-                </div>
-            </div>
-        </aside>
 
+        <section class="jg-grid-section container">
+            <h3 class="section-title">Proyectos en el Sector</h3>
+            <div id="emptyState" class="jg-empty-state">
+                <div class="scanner-line"></div>
+                <p>ESPERANDO ORDENES DEL ADMINISTRADOR</p>
+                <span class="system-log">> No se detectan juegos comerciales en este sector.</span>
+            </div>
+            <div class="jg-cyber-grid" id="gameGrid"></div>
+        </section>
     </main>
 
-    <footer class="jg-footer">
-        <div class="container">
-            <div class="jg-footer-logo">
-                <img src="images/panther_logo.png" alt="JG Logo" class="jg-logo-sm">
-                <span>© 2024 JoacoGames. Tu red personal.</span>
-            </div>
-            <p>Hecho con ❤️ para amigos y familia.</p>
-        </div>
-    </footer>
+    <nav class="jg-bottom-nav">
+        <a href="#" class="b-nav-item active">NÚCLEO</a>
+        <button onclick="addNewGame()" class="btn-add-game">+</button>
+        <a href="#" class="b-nav-item">PERFIL</a>
+    </nav>
 
     <script src="script.js"></script>
 </body>
