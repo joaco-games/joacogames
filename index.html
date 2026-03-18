@@ -3,77 +3,103 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>JoacoGames | OS</title>
-    <link rel="manifest" href="manifest.json">
-    <meta name="theme-color" content="#e0ac00">
-    <meta name="apple-mobile-web-app-capable" content="yes">
+    <title>JoacoGames | Central de Mando</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body class="jg-cyber-dark">
 
+    <div class="bg-overlay"></div>
+
     <div id="notificacionLogro" class="jg-notification">
-        <span id="logroTitulo">🏆 LOGRO DESBLOQUEADO</span>
+        <span id="logroTitulo">🏆 ¡LOGRO DESBLOQUEADO!</span>
     </div>
 
     <header class="jg-navbar">
         <div class="jg-container nav-flex">
-            <div class="jg-brand" onclick="adminMode()">
-                <img src="images/panther_logo.png" alt="JG" class="logo-img">
-                <h1 class="jg-title">JOACO<span>GAMES</span></h1>
+            <div class="jg-brand-hub" onclick="adminMode()">
+                <div class="panther-hex">
+                    <img src="images/panther_logo.png" alt="JoacoGames Logo">
+                </div>
+                <h1 class="jg-title-text">JOACO<span>GAMES</span></h1>
             </div>
-            <div class="user-stats">
-                <div class="stats-info">
+            
+            <nav class="jg-nav-links">
+                <a href="#" class="nav-item active">NÚCLEO</a>
+                <a href="#comunidad" class="nav-item">RED SOCIAL</a>
+                <a href="#" class="nav-item">SOPORTE</a>
+            </nav>
+
+            <div class="jg-profile-pill">
+                <div class="stats-text">
                     <span id="userLevel">Nivel 1</span>
                     <span id="userPoints">0 XP</span>
                 </div>
-                <img src="images/avatar_joaco.jpg" class="avatar">
+                <img src="images/avatar_joaco.jpg" alt="Admin" class="jg-user-img">
+                <div class="jg-online-pulse"></div>
             </div>
         </div>
     </header>
 
-    <main class="jg-main">
-        <section class="epic-hero">
-            <div class="featured-card">
-                <img src="images/banner_juaco.jpg" class="hero-bg">
-                <div class="hero-content">
-                    <span class="badge">DESTACADO</span>
-                    <h2>Age of the Dead Master</h2>
-                    <p>Mezcla táctica de estrategia y supervivencia.</p>
-                    <button class="btn-launch" onclick="registrarPartida(true)">EJECUTAR PROTOCOLO</button>
+    <main class="jg-dashboard container">
+        
+        <section class="jg-hero-v2">
+            <div class="hero-banner-container">
+                <img src="images/banner_juaco.jpg" alt="JoacoGames Banner" class="main-banner">
+                <div class="hero-overlay">
+                    <span class="badge-new" id="novedadesText">SISTEMA ACTIVO v1.0</span>
+                    <h2>NÚCLEO DE MANDO</h2>
+                    <p>Plataforma privada para la familia y amigos de JoacoGames.</p>
+                    <div class="hero-btns">
+                        <button class="btn-primary-neon" onclick="registrarPartida(true)">SIMULAR VICTORIA (+100 XP)</button>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <section class="steam-progress container">
-            <div class="xp-header">
-                <span>PROGRESO DEL SISTEMA</span>
-                <span id="xpText">0 / 500 XP</span>
+        <section id="comunidad" class="jg-network-hub">
+            <div class="section-header">
+                <h3>CONEXIONES DE NÚCLEO</h3>
+                <div class="jg-line-decorator"></div>
             </div>
-            <div class="progress-bar">
-                <div id="xpFill" class="fill"></div>
+            <div class="social-links-container">
+                <a href="https://linktr.ee/joacogames" target="_blank" class="link-node">
+                    <span class="node-icon">🔗</span> LINKTREE_OFFICIAL
+                </a>
+                <a href="#" target="_blank" class="link-node">
+                    <span class="node-icon">💬</span> DISCORD_SRV
+                </a>
+                <a href="#" target="_blank" class="link-node">
+                    <span class="node-icon">📸</span> INTEL_GRAM
+                </a>
             </div>
         </section>
 
-        <section class="links-section container">
-            <h3>NODOS DE CONEXIÓN</h3>
-            <div class="grid-links">
-                <a href="https://linktr.ee/joacogames" class="node">🔗 LINKTREE</a>
-                <a href="#" class="node">💬 DISCORD</a>
+        <section class="jg-grid-section">
+            <div class="section-header">
+                <h2>BASE DE DATOS</h2>
+                <div class="jg-line-decorator"></div>
             </div>
+            
+            <div class="jg-empty-state" id="emptyState">
+                <div class="panther-scanner"></div>
+                <div class="empty-text">
+                    <h3>SINCRONIZACIÓN COMPLETADA</h3>
+                    <p>No se han detectado juegos o archivos comerciales en este sector.</p>
+                    <span class="system-log">> Esperando inyección de datos del administrador...</span>
+                </div>
+            </div>
+
+            <div class="jg-cyber-grid" id="gameGrid">
+                </div>
         </section>
     </main>
 
-    <nav class="mobile-nav">
-        <div class="nav-item active">NÚCLEO</div>
-        <button class="nav-add" onclick="addNewGame()">+</button>
-        <div class="nav-item">REDES</div>
+    <nav class="jg-bottom-nav">
+        <a href="#" class="b-nav-item active">NÚCLEO</a>
+        <button onclick="addNewGame()" class="btn-add-game">+</button>
+        <a href="#" class="b-nav-item">REDES</a>
     </nav>
 
     <script src="script.js"></script>
-    <script>
-        if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('sw.js');
-        }
-    </script>
 </body>
 </html>
