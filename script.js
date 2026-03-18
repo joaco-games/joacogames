@@ -1,82 +1,91 @@
-// --- DATOS DEL USUARIO (Sincronizado con tu GDScript) ---
-let usuario = {
-    "puntos": 0,
-    "nivel": 1,
-    "partidas": 0,
-    "victorias_seguidas": 0,
-    "logros": {
-        "novato": {"titulo": "Primer Paso", "ganado": false},
-        "racha": {"titulo": "Racha de Fuego", "ganado": false}
-    }
-};
+// --- Datos Simulados de Juegos de JoacoGames ---
+// Puedes editar esta lista para que coincida con tus juegos reales
+const gamesData = [
+    {
+        title: "Dota 2 (El Inmortal)",
+        genre: ["MOBA", "Estrategia"],
+        price: "Gratis",
+        isNew: false,
+        image: "images/game1_thumb.jpg", // Reemplaza con tus imágenes reales
+        link: "https://store.steampowered.com/app/570/"
+    },
+    {
+        title: "Counter-Strike 2 (Red Joaco)",
+        genre: ["Shooter", "Táctico"],
+        price: "Gratis",
+        isNew: true,
+        image: "images/game2_thumb.jpg",
+        link: "https://store.steampowered.com/app/730/"
+    },
+    {
+        title: "Apex Legends™ - Versión JG",
+        genre: ["Battle Royale", "Acción"],
+        price: "Gratis",
+        isNew: false,
+        image: "images/game3_thumb.jpg",
+        link: "https://store.steampowered.com/app/1172470/"
+    },
+     {
+        title: "War Thunder (Joaco Edition)",
+        genre: ["Simulación", "Vehículos"],
+        price: "Gratis",
+        isNew: false,
+        image: "images/game4_thumb.jpg",
+        link: "https://store.steampowered.com/app/236390/"
+    },
+     {
+        title: "Overwatch® 2 - Servidor Local",
+        genre: ["Shooter", "Héroes"],
+        price: "Gratis",
+        isNew: true,
+        image: "images/game5_thumb.jpg",
+        link: "https://store.steampowered.com/app/2357570/"
+    },
+];
 
-// --- LÓGICA DE PROGRESO (Igual a tu Godot) ---
-function registrarPartida(gano) {
-    usuario.partidas += 1;
-    if (gano) {
-        usuario.victorias_seguidas += 1;
-        usuario.puntos += 100;
-    } else {
-        usuario.victorias_seguidas = 0;
-        usuario.puntos += 20;
-    }
+// --- Función para Cargar la Cuadrícula de Juegos ---
+function loadGameGrid() {
+    const gridContainer = document.getElementById('gameGrid');
+    if (!gridContainer) return;
 
-    // Subir de nivel cada 500 puntos
-    usuario.nivel = Math.floor(usuario.puntos / 500) + 1;
-    
-    chequearLogros();
-    actualizarInterfaz();
-    
-    // Feedback visual
-    console.log(`[JOACOGAMES] Partidas: ${usuario.partidas} | XP: ${usuario.puntos}`);
+    // Limpia el cargador
+    gridContainer.innerHTML = '';
+
+    gamesData.forEach(game => {
+        const cardHTML = `
+            <div class="jg-game-card">
+                ${game.isNew ? '<span class="jg-new-badge">NUEVO</span>' : ''}
+                <img src="${game.image}" alt="${game.title}" class="jg-game-thumb">
+                <div class="jg-card-info">
+                    <h4 class="jg-game-title">${game.title}</h4>
+                    <div class="jg-game-details">
+                        <div class="jg-game-genres">
+                            ${game.genre.map(g => `<span class="jg-genre-tag">${g}</span>`).join('')}
+                        </div>
+                        <span class="jg-game-price">${game.price}</span>
+                    </div>
+                </div>
+                <a href="${game.link}" target="_blank" class="jg-card-link-overlay"></a>
+            </div>
+        `;
+        gridContainer.innerHTML += cardHTML;
+    });
 }
 
-function chequearLogros() {
-    if (usuario.partidas >= 1 && !usuario.logros.novato.ganado) {
-        desbloquearLogro("novato");
-    }
-    if (usuario.victorias_seguidas >= 3 && !usuario.logros.racha.ganado) {
-        desbloquearLogro("racha");
-    }
+// --- Gestión de Estado de Navegación ---
+function setupNavStatus() {
+    const navLinks = document.querySelectorAll('.jg-main-nav a');
+    navLinks.forEach(link => {
+        link.addEventListener('click', function() {
+            navLinks.forEach(nl => nl.classList.remove('active'));
+            this.classList.add('active');
+        });
+    });
 }
 
-function desbloquearLogro(id) {
-    usuario.logros[id].ganado = true;
-    const panel = document.getElementById("notificacionLogro");
-    const titulo = document.getElementById("logroTitulo");
-    
-    titulo.innerText = "🏆 " + usuario.logros[id].titulo;
-    panel.classList.add("show");
-    
-    setTimeout(() => { panel.classList.remove("show"); }, 3000);
-}
-
-function actualizarInterfaz() {
-    document.getElementById("userLevel").innerText = `Nivel ${usuario.nivel}`;
-    document.getElementById("userPoints").innerText = `${usuario.puntos} XP`;
-    
-    // Efecto wave para novedades
-    document.getElementById("novedadesText").innerText = "🔥 NUEVO: Sistema de rangos activado!";
-}
-
-// Inyección de proyectos dinámica
-let misProyectos = ["Age of the Dead Master", "Grim Empires"];
-
-function renderBiblioteca() {
-    const grid = document.getElementById("gameGrid");
-    grid.innerHTML = misProyectos.map(p => `
-        <div class="link-node" onclick="registrarPartida(true)" style="text-align:left">
-            <span>🎮 ${p}</span>
-        </div>
-    `).join('');
-}
-
-function addNewGame() {
-    const p = prompt("Nombre del nuevo proyecto:");
-    if(p) { misProyectos.push(p); renderBiblioteca(); }
-}
-
-document.addEventListener("DOMContentLoaded", () => {
-    actualizarInterfaz();
-    renderBiblioteca();
+// --- Inicialización ---
+document.addEventListener('DOMContentLoaded', () => {
+    // Pequeño retraso para simular la "carga de red"
+    setTimeout(loadGameGrid, 800);
+    setupNavStatus();
 });
