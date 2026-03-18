@@ -1,20 +1,456 @@
+/* --- Variables de Color y Temas JoacoGames --- */
 :root {
-    --neon-gold: #e0ac00;
-    --dark-bg: #050505;
-    --glass: rgba(20, 20, 25, 0.8);
-    --neon-border: rgba(224, 172, 0, 0.3);
+    --jg-bg-darkest: #010a14;
+    --jg-bg-dark: #071221;
+    --jg-bg-mid: #101c2e;
+    --jg-text-main: #d1d5db;
+    --jg-text-accent: #f9fafb;
+    --jg-brand-primary: #e0ac00; /* El dorado de tu marca de pantera */
+    --jg-brand-secondary: #ff8c00; /* El naranja del circuito */
+    --jg-accent-hover: #b8860b;
+    --jg-accent-light: rgba(224, 172, 0, 0.2);
+    --jg-bg-steam-blue: #171a21; /* Referencia sutil a Steam */
+    --jg-bg-steam-subheader: #1b2838; /* Referencia sutil a Steam */
+    --jg-success-green: #37b34a;
 }
 
+/* --- Estilos Base --- */
 body {
-    background-color: var(--dark-bg);
-    color: #fff;
-    font-family: 'Segoe UI', sans-serif;
+    font-family: 'Motiva Sans', Arial, Helvetica, sans-serif; /* Intenta usar la fuente de Steam */
+    background-color: var(--jg-bg-darkest);
+    color: var(--jg-text-main);
     margin: 0;
-    padding-bottom: 80px; /* Espacio para la barra inferior */
+    padding: 0;
+    line-height: 1.6;
 }
 
-.jg-container { max-width: 1200px; margin: 0 auto; padding: 0 15px; }
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
 
-/* Header y Perfil */
-.jg-navbar {
-    background: var(--glass
+h1, h2, h3 {
+    color: var(--jg-text-accent);
+    font-weight: 700;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+a:hover {
+    color: var(--jg-brand-primary);
+}
+
+/* --- Barra de Navegación Principal (Header) --- */
+.jg-header {
+    background-color: var(--jg-bg-steam-blue);
+    padding: 15px 0;
+    border-bottom: 2px solid var(--jg-bg-steam-subheader);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.jg-nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.jg-brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.jg-logo {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--jg-brand-primary);
+    box-shadow: 0 0 10px rgba(224, 172, 0, 0.3);
+}
+
+.jg-brand-name {
+    font-size: 20px;
+    font-weight: bold;
+    color: #fff;
+    letter-spacing: 1px;
+}
+
+.jg-brand-name .jg-accent {
+    color: var(--jg-brand-primary);
+}
+
+.jg-main-nav ul {
+    list-style: none;
+    display: flex;
+    gap: 25px;
+    margin: 0;
+    padding: 0;
+}
+
+.jg-main-nav a {
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.jg-main-nav a.active {
+    color: var(--jg-brand-primary);
+}
+
+.jg-user-actions {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.jg-btn-install {
+    background: linear-gradient(90deg, #1b74e4 0%, #15c3cf 100%);
+    color: #fff;
+    border: none;
+    padding: 8px 20px;
+    font-size: 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: transform 0.1s;
+}
+
+.jg-btn-install:hover {
+    transform: scale(1.03);
+}
+
+.jg-icon-svg {
+    width: 14px;
+    height: 14px;
+}
+
+.jg-user-profile {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.jg-avatar-circle {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.jg-username {
+    font-weight: 500;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.jg-status-dot.online {
+    width: 6px;
+    height: 6px;
+    background-color: var(--jg-success-green);
+    border-radius: 50%;
+}
+
+.jg-logout-btn {
+    background: none;
+    border: none;
+    color: var(--jg-text-main);
+    font-size: 11px;
+    cursor: pointer;
+}
+
+/* --- Barra de Sub-navegación / Buscar --- */
+.jg-subheader {
+    background-color: var(--jg-bg-steam-subheader);
+    padding: 10px 0;
+    border-bottom: 1px solid #2a3f5a;
+}
+
+.jg-subnav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.jg-category-nav {
+    display: flex;
+    gap: 20px;
+    font-size: 12px;
+}
+
+.jg-category-nav a {
+    font-weight: 500;
+}
+
+.jg-search-bar {
+    display: flex;
+    background-color: #316282;
+    border-radius: 3px;
+    padding: 2px;
+}
+
+.jg-search-bar input {
+    background: none;
+    border: none;
+    color: #fff;
+    padding: 5px 10px;
+    font-size: 12px;
+    outline: none;
+}
+
+.jg-search-bar button {
+    background: none;
+    border: none;
+    color: rgba(255, 255, 255, 0.7);
+    cursor: pointer;
+}
+
+/* --- Sección Héroe/Banner Principal --- */
+.jg-hero-section {
+    position: relative;
+    height: 400px;
+    overflow: hidden;
+}
+
+.jg-hero-banner {
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+}
+
+.jg-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(0deg, var(--jg-bg-darkest) 0%, rgba(1, 10, 20, 0.7) 100%);
+}
+
+.jg-hero-text {
+    position: relative;
+    z-index: 2;
+    padding-top: 150px;
+    color: #fff;
+    text-shadow: 0 0 10px rgba(0,0,0,0.5);
+}
+
+.jg-floating-panther {
+    position: absolute;
+    top: 100px;
+    right: 100px;
+    width: 150px;
+    height: 150px;
+    z-index: 1;
+    animation: panther-float 5s ease-in-out infinite;
+    opacity: 0.6;
+}
+
+.jg-panther-body {
+    filter: drop-shadow(0 0 10px rgba(224, 172, 0, 0.8));
+}
+
+@keyframes panther-float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-15px); }
+}
+
+/* --- Cuadrícula de Juegos Destacados --- */
+.jg-featured-games {
+    padding: 40px 0;
+}
+
+.jg-featured-games h3 {
+    font-size: 18px;
+    margin-bottom: 25px;
+    padding-left: 10px;
+    border-left: 3px solid var(--jg-brand-primary);
+}
+
+.jg-game-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+}
+
+.jg-loader {
+    grid-column: 1 / -1;
+    text-align: center;
+    color: var(--jg-brand-primary);
+    padding: 50px;
+    animation: flicker 1.5s infinite;
+}
+
+@keyframes flicker {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+}
+
+/* Estilos de Tarjeta de Juego */
+.jg-game-card {
+    background-color: var(--jg-bg-mid);
+    border-radius: 5px;
+    overflow: hidden;
+    transition: transform 0.2s, box-shadow 0.2s;
+    position: relative;
+}
+
+.jg-game-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3), 0 0 15px var(--jg-accent-light);
+}
+
+.jg-game-thumb {
+    width: 100%;
+    height: 160px;
+    object-fit: cover;
+}
+
+.jg-card-info {
+    padding: 15px;
+}
+
+.jg-game-title {
+    font-weight: bold;
+    font-size: 14px;
+    color: #fff;
+    margin: 0 0 8px;
+}
+
+.jg-game-details {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.jg-game-genres {
+    display: flex;
+    gap: 5px;
+}
+
+.jg-genre-tag {
+    font-size: 10px;
+    background-color: #2e3b4d;
+    padding: 2px 6px;
+    border-radius: 3px;
+    color: #fff;
+}
+
+.jg-game-price {
+    font-weight: bold;
+    font-size: 13px;
+    color: var(--jg-brand-primary);
+}
+
+.jg-new-badge {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: var(--jg-brand-secondary);
+    color: #fff;
+    font-size: 10px;
+    font-weight: bold;
+    padding: 3px 8px;
+    border-radius: 20px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+}
+
+/* --- Sidebar de Amigos/Familia --- */
+.jg-friends-sidebar {
+    padding: 20px 0;
+    border-top: 1px solid #1a2737;
+    background-color: #0c1624;
+    border-radius: 8px;
+    margin-top: 30px;
+}
+
+.jg-friends-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.jg-online-count {
+    color: var(--jg-success-green);
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.jg-friends-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 10px;
+}
+
+.jg-friend {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px;
+    border-radius: 4px;
+}
+
+.jg-friend:hover {
+    background-color: #172a3a;
+}
+
+.jg-avatar-32 {
+    width: 24px;
+    height: 24px;
+    border-radius: 4px;
+    opacity: 0.8;
+}
+
+.jg-friend.online .jg-avatar-32 {
+    opacity: 1;
+    border: 2px solid var(--jg-success-green);
+}
+
+.friend-name {
+    font-size: 12px;
+}
+
+.jg-friend.offline .friend-name {
+    color: #5d6e81;
+}
+
+/* --- Footer --- */
+.jg-footer {
+    background-color: #0b121c;
+    padding: 40px 0;
+    font-size: 11px;
+    border-top: 1px solid #1a2737;
+    margin-top: 50px;
+    text-align: center;
+}
+
+.jg-footer-logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.jg-logo-sm {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+}
+
+.jg-footer p {
+    color: #5d6e81;
+}
